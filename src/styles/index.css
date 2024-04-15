@@ -1,0 +1,27 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+  
+  /* color-scheme: light dark; */
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #eeeeee;
+  --border-radius: 2em;
+  --sub-color: rgb(228, 227, 227);
+  
+
+}
+
+
+body {
+  /* margin: 0; */
+  /* display: fixed; */
+  /* place-items: center; */
+  /* min-width: 320px; */
+  /* min-height: 100vh; */
+  font-family: 'Inter', sans-serif; 
+  
+ 
+}
+

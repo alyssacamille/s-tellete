@@ -1,0 +1,53 @@
+#root {
+  max-width: 40em;
+  /* max-height: 50em; */
+  margin: 0 auto;
+  padding: 0 2rem;
+  /* text-align: center; */
+  background: var(--sub);
+  
+}
+
+.satellite-logo {
+  height: 3em;
+  /* padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms; */
+}
+
+/* .logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+} */
+
+.card {
+  padding: 20px 0;
+}
+
+.card-small {
+  padding:  10px ;
+ 
+}
+
+.default-round{
+  border-radius: var(--border-radius);
+}
+
+.top-round{
+  border-radius: var(--border-radius) var(--border-radius) 0 0 ;
+}
+.bottom-round{
+  border-radius:  0 0 var(--border-radius) var(--border-radius) ;
+}
+
+.footer{
+  
+    max-width: 36em;
+    /* max-height: 50em; */
+    margin: 0 auto;
+    padding:2rem;
+    text-align: center;
+  
+}
