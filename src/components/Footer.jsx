@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { IoNotifications, BiPlanet, TbMailFilled, FaRocket, CgProfile, CgClose } from 'react-icons/all';
+import { IoNotifications } from 'react-icons/io5';
+import { BiPlanet } from 'react-icons/bi';
+import { TbMailFilled } from 'react-icons/tb';
+import { FaRocket } from 'react-icons/fa6';
+import { CgProfile, CgClose } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import Logo from './Logo';
