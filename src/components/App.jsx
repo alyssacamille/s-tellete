@@ -21,18 +21,25 @@ return (
       {/* <Scroll/> */}
    
       {/* <p>You're at app.jsx</p> */}
+      
+
+
       <div className='card card-small '>
      
-      <div className='fixed bottom-20 right-0 z-99 '>
-        {/* <ImageUploader/> */} 
-        {/* nilagay ko sa profile  */}
-        <IoAddCircle className='cursor-pointer' style={{ fontSize: '5rem'}}/> 
-        {/*modal pop up yung post ni omar*/}
-       
-      </div>
+      
+     
  <Feed/> 
       </div>
       <Footer />
+      
+      <div className='flex justify-end  relative right-0  mb-20 mr-0 p-100 z-99 '>
+    {/* <ImageUploader/> */} 
+    {/* nilagay ko sa profile  */}
+   <div class="fixed mx-auto p-8 z-99 bottom-16 items-end">
+   <IoAddCircle className='cursor-pointer' style={{ fontSize: '5rem'}}/> 
+  
+   </div>  {/*modal pop up yung post ni omar*/}
+   </div>
     </>
   );
 

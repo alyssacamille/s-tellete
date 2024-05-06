@@ -3,6 +3,7 @@ import { FaHome } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
 import { BiPlanet } from "react-icons/bi";
 import { TbMailFilled } from "react-icons/tb";
+import { IoAddCircle } from 'react-icons/io5';
 import { FaRocket } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
 import { Link } from 'react-router-dom';
@@ -122,6 +123,8 @@ const showModal = (title, message) => {
         <Link to={"/Explore"}>
         <FaRocket className="icon" size={'24'}/>
         </Link>
+
+       
 {/* 
        
         <CgProfile className="icon" size={'24'}/>
@@ -234,12 +237,14 @@ const showModal = (title, message) => {
         
         <button
           onClick={validateSignUp}
-          className="bg-blue-700 text-white border-none py-2 px-4 cursor-pointer rounded-md w-5/6"
+          className="bg-blue-700 text-white default-border py-2 px-4 cursor-pointer rounded-md w-5/6"
         >
           Continue
         </button>
 
         <div>{signupMessage}</div> {/* Display signup message */}
+       
+
       </div>
     {/* <Footer/> */}
     </div>
@@ -252,6 +257,15 @@ const showModal = (title, message) => {
 </Modal>
     </>
     </div>
+  )
+  return(
+    <div className=' mx-auto p-8 text-center z-99 '>
+    {/* <ImageUploader/> */} 
+    {/* nilagay ko sa profile  */}
+    <IoAddCircle className='cursor-pointer' style={{ fontSize: '5rem'}}/> 
+    {/*modal pop up yung post ni omar*/}
+   
+  </div>  
   )
 }
 
