@@ -156,7 +156,11 @@ const showModal = (title, message) => {
         {/* Image div */}
        
 
+<<<<<<< HEAD
         <div  className='fixed relative object-contain '> 
+=======
+        <div  className='fixed relative object-contain '> (
+>>>>>>> 9a04c81c608ae597de8061451f337901b79c12c0
     <div className="form-container bg-gray-200 w-5/6 mx-auto p-6 shadow-lg rounded-xl">
       <div className="form-header">
         <h1 className="text-blue-700">satellite</h1>
@@ -237,18 +241,29 @@ const showModal = (title, message) => {
         
         <button
           onClick={validateSignUp}
+<<<<<<< HEAD
           className="bg-blue-700 text-white default-border py-2 px-4 cursor-pointer rounded-md w-5/6"
+=======
+          className="bg-blue-700 text-white border-none py-2 px-4 cursor-pointer rounded-md w-5/6"
+>>>>>>> 9a04c81c608ae597de8061451f337901b79c12c0
         >
           Continue
         </button>
 
         <div>{signupMessage}</div> {/* Display signup message */}
+<<<<<<< HEAD
        
 
       </div>
     {/* <Footer/> */}
     </div>
    </div>
+=======
+      </div>
+    {/* <Footer/> */}
+    </div>
+  ); </div>
+>>>>>>> 9a04c81c608ae597de8061451f337901b79c12c0
 
 
     
