@@ -10,7 +10,7 @@ pids
 *.pid.lock
 
 # Dependency directories
-
+node_modules/
 jspm_packages/
 
 # Optional npm cache directory
@@ -40,3 +40,8 @@ jspm_packages/
 
 # Visual Studio Code settings
 .vscode/
+
+#gitIgnore
+package-lock.json
+package.json
+.gitIgnore
