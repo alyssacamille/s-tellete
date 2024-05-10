@@ -1,6 +1,11 @@
 import React,{useState} from 'react'
 import Footer from './Footer';
 
+
+
+
+
+
 export default function Authorization() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -10,6 +15,7 @@ export default function Authorization() {
   const [loginMessage, setLoginMessage] = useState("");
   const [signupMessage, setSignupMessage] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [activeForm, setActiveForm] = useState("login");
 
   const showForm = (formId) => {
     const forms = document.getElementsByClassName("form-content");
@@ -17,7 +23,15 @@ export default function Authorization() {
       forms[i].style.display = "none";
     }
     document.getElementById(formId).style.display = "block";
+  
+    // Get all tab buttons
+    const tabs = document.querySelectorAll(".tab");
+    // Remove active class from all tabs
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    // Add active class to the clicked tab
+    document.getElementById(`tab-${formId}`).classList.add("active");
   };
+  
 
   const validateSignUp = () => {
     if (!username || !email || !password) {
@@ -72,23 +86,49 @@ export default function Authorization() {
   };
 
   return (
-    <div className="form-container bg-gray-200 w-5/6 mx-auto p-6 shadow-lg rounded-xl">
-      <div className="form-header">
-        <h1 className="text-blue-700">satellite</h1>
-        <p className="text-gray-700">Be a satellite, orbit now! 🛰✨</p>
-      </div>
-
+    <div className="form-container  w-5/6 mx-auto  rounded-xl">
+     
       <div className="tabs flex justify-around mb-6 rounded-xl w-full max-w-xs">
-        <button
-          className="tab flex-1 bg-gray-200 text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg"
-          onClick={() => showForm("login")}
-        >
-          Log in
-        </button>
-        <button
-          className="tab flex-1 bg-gray-200 text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg"
-          onClick={() => showForm("signup")}
-        >
+      
+      <button
+  id="tab-login"
+  className={`tab flex-1  text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg ${
+    activeForm === "login" ? "active" : ""
+  }`}
+  onClick={() => {
+    fetch('http://localhost:3000/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Add any other headers if needed
+      },
+      body: JSON.stringify({
+        key: 'value',
+        // Add any data you want to send in the body
+      }),
+    })
+      
+      .then(data => {
+        console.log('Success:', data);
+        // Handle the response data
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors
+      });
+    showForm("login");
+  }}
+>
+  Log in
+</button>
+
+       <button
+    id="tab-signup"
+    className={`tab flex-1  text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg ${
+      activeForm === "signup" ? "active" : ""
+    }`}
+    onClick={() => showForm("signup")}
+  >
           Sign up
         </button>
       </div>
@@ -108,9 +148,9 @@ export default function Authorization() {
           onChange={(e) => setLoginPassword(e.target.value)}
           className="py-2 px-4 mb-4 border border-gray-300 rounded-md"
         />
-        <a href="#" className="text-blue-700 no-underline mb-4">
+        {/* <a href="#" className="text-blue-700 no-underline mb-4">
           Forgot password?
-        </a>
+        </a> */}
         <button
           onClick={login}
           className="bg-blue-700 text-white border-none py-2 px-4 cursor-pointer rounded-md w-5/6"

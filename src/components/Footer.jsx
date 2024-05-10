@@ -7,6 +7,7 @@ import { CgProfile, CgClose } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import Logo from './Logo';
+import Authorization from './Authorization';
 
 const Footer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -33,9 +34,9 @@ const Footer = () => {
         <TbMailFilled className="icon" size={'24'}/>
       </Link>
 
-      <Link to={"/Explore"}>
+      {/* <Link to={"/Explore"}>
         <FaRocket className="icon" size={'24'}/>
-      </Link>
+      </Link> */}
 
       <CgProfile className="icon" size={'24'} onClick={openModal} />
 
@@ -51,6 +52,7 @@ const Footer = () => {
           <button className='rounded-full p-2 absolute top-3 right-3' onClick={closeModal}>
             <CgClose className='text-black text-xl' />
           </button>
+          <Authorization/>
         </div>
 
         <div className='fixed relative object-contain '>
