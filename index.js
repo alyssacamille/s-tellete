@@ -4,8 +4,8 @@ import { connect } from 'mongoose'; //For MongoDB
 import multer from 'multer';
 import path from 'path';
 
-import User from './models/User.js'; // Import User model
-import Product from './models/Products.js'; // Import Product model
+import User from './models/User'; // Import User model
+import Product from './models/Product'; // Import Product model
 
 const app = express();
 const PORT = process.env.PORT || 3000;
