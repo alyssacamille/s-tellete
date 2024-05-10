@@ -29,12 +29,14 @@ import Feed from './components/Feed.jsx';
 import Message from './components/Message.jsx';
 import MessageInput from './components/Message-Input.jsx';
 import Post from './components/Post.jsx';
+import Modal from 'react-modal';
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
+Modal.setAppElement('#root');
 
 const router = createBrowserRouter([
   {

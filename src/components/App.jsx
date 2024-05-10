@@ -9,6 +9,7 @@ import {D1,D2,L1,L2,L3,L4,L5,L6,L7,LR1,LR2,S0,S1,S10,S11,S12,S13,S14,S15,S16,S2,
 import Navbar from './Navbar.jsx';
 import { IoAddCircle } from "react-icons/io5";
 import ImageUploader from './Image-Uploader.jsx';
+import Modal from 'react-modal';
 
 
 function App() {
