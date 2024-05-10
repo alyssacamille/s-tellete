@@ -21,7 +21,7 @@
     padding: 0px 0;
     z-index: 10000; /* Ensure it's above the overlay */
     border-radius: var(--border-radius);
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds the modal height */
+    overflow-y: hidden; /* Enable vertical scrolling if content exceeds the modal height */
   
     /* Hide scrollbar visually */
     scrollbar-width: none; /* Firefox */

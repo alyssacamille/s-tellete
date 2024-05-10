@@ -20,150 +20,149 @@ const shuffleArray = (array) => {
 const products = {
   data: shuffleArray([
     {
-      productName: 'OMR 1',
-      price: '₱ 250',
-      image: D1,
-      artist: "dasheru.xz",
-      toc: " Scheduling" +"All commissions will be done according to who paid first, unless a rush/priority fee was paid."
+      "productName": "OMR 1",
+      "price": "₱ 250",
+      "image": "D1",
+      "artist": "dasheru.xz",
+      "toc": " SchedulingAll commissions will be done according to who paid first, unless a rush/priority fee was paid."
     },
     {
-      productName: 'OMR 2 ',
-      price: '10',
-      image: D2,
-      artist: "dasheru.xz",
-      toc: " Scheduling" +"All commissions will be done according to who paid first, unless a rush/priority fee was paid."
-   
+      "productName": "OMR 2 ",
+      "price": "10",
+      "image": "D2",
+      "artist": "dasheru.xz",
+      "toc": " SchedulingAll commissions will be done according to who paid first, unless a rush/priority fee was paid."
     },
     {
-      productName: 'Chibi Style',
-      price: '₱ 250',
-      image: L1,
+      "productName": "Chibi Style",
+      "price": "₱ 250",
+      "image": "L1"
     },
     {
-      productName: 'YCH ',
-      price: '10',
-      image: L2,
+      "productName": "YCH ",
+      "price": "10",
+      "image": "L2"
     },
     {
-      productName: 'Fishing',
-      price: '₱ 250',
-      image: L3,
+      "productName": "Fishing",
+      "price": "₱ 250",
+      "image": "L3"
     },
     {
-      productName: 'Spear',
-      price: '₱ 300',
-      image: L4,
+      "productName": "Spear",
+      "price": "₱ 300",
+      "image": "L4"
     },
     {
-      productName: 'Mask Guy',
-      price: '₱ 375',
-      image: L5,
+      "productName": "Mask Guy",
+      "price": "₱ 375",
+      "image": "L5"
     },
     {
-      productName: 'Kurapika',
-      price: '₱ 375',
-      image: L6,
+      "productName": "Kurapika",
+      "price": "₱ 375",
+      "image": "L6"
     },
     {
-      productName: 'Loli Nurse',
-      price: '₱ 300',
-      image: L7,
+      "productName": "Loli Nurse",
+      "price": "₱ 300",
+      "image": "L7"
     },
     {
-      productName: 'Primogem',
-      price: '10',
-      image: LR1,
+      "productName": "Primogem",
+      "price": "10",
+      "image": "LR1"
     },
     {
-      productName: 'Lowbatt Girl',
-      price: '₱ 400',
-      image: LR2,
+      "productName": "Lowbatt Girl",
+      "price": "₱ 400",
+      "image": "LR2"
     },
     {
-      productName: 'NYAN Pixels',
-      price: '₱ 400',
-      image: S0,
+      "productName": "NYAN Pixels",
+      "price": "₱ 400",
+      "image": "S0"
     },
     {
-      productName: 'Space Bunny',
-      price: '₱ 375',
-      image: S1,
+      "productName": "Space Bunny",
+      "price": "₱ 375",
+      "image": "S1"
     },
     {
-      productName: 'Space Bunny 2',
-      price: '₱ 375',
-      image: S2,
+      "productName": "Space Bunny 2",
+      "price": "₱ 375",
+      "image": "S2"
     },
     {
-      productName: 'Space Bunny 3',
-      price: '₱ 375',
-      image: S3,
+      "productName": "Space Bunny 3",
+      "price": "₱ 375",
+      "image": "S3"
     },
     {
-      productName: 'Space Bunny 4',
-      price: '₱ 375',
-      image: S4,
+      "productName": "Space Bunny 4",
+      "price": "₱ 375",
+      "image": "S4"
     },
     {
-      productName: 'Saki Neko',
-      price: '₱ 375',
-      image: S5,
+      "productName": "Saki Neko",
+      "price": "₱ 375",
+      "image": "S5"
     },
     {
-      productName: 'Saki Neko 2',
-      price: '₱ 375',
-      image: S6,
+      "productName": "Saki Neko 2",
+      "price": "₱ 375",
+      "image": "S6"
     },
     {
-      productName: 'Apex Yaoi',
-      price: '₱ 150',
-      image: S7,
+      "productName": "Apex Yaoi",
+      "price": "₱ 150",
+      "image": "S7"
     },
     {
-      productName: 'Saki GL',
-      price: '₱ 175',
-      image: S8,
+      "productName": "Saki GL",
+      "price": "₱ 175",
+      "image": "S8"
     },
     {
-      productName: 'Neko Trap',
-      price: '₱ 200',
-      image: S9,
+      "productName": "Neko Trap",
+      "price": "₱ 200",
+      "image": "S9"
     },
     {
-      productName: 'Yaoi',
-      price: '₱ 275',
-      image: S10,
+      "productName": "Yaoi",
+      "price": "₱ 275",
+      "image": "S10"
     },
     {
-      productName: 'Saki GL 2',
-      price: '₱ 250',
-      image: S11,
+      "productName": "Saki GL 2",
+      "price": "₱ 250",
+      "image": "S11"
     },
     {
-      productName: 'Saki Art',
-      price: '₱ 300',
-      image: S12,
+      "productName": "Saki Art",
+      "price": "₱ 300",
+      "image": "S12"
     },
     {
-      productName: 'Saki Trap 2',
-      price: '₱ 375',
-      image: S13,
+      "productName": "Saki Trap 2",
+      "price": "₱ 375",
+      "image": "S13"
     },
     {
-      productName: 'Saki Neko Gold Eye',
-      price: '₱ 400',
-      image: S14,
+      "productName": "Saki Neko Gold Eye",
+      "price": "₱ 400",
+      "image": "S14"
     },
     {
-      productName: 'Saki Manga Art',
-      price: '₱ 475',
-      image: S15,
+      "productName": "Saki Manga Art",
+      "price": "₱ 475",
+      "image": "S15"
     },
     {
-      productName: 'Saki Ehe!',
-      price: '₱ 500',
-      image: S16,
-    },
+      "productName": "Saki Ehe!",
+      "price": "₱ 500",
+      "image": "S16"
+    }
     
     // Other product objects
   ]),
