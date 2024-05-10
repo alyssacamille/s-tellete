@@ -184,19 +184,16 @@ function App() {
   };
 
   const card = (product) => {
-
     return (
- 
-       
-      <div className=' default-round inline-block w-full'>
-        {/* // <div key={product.productName} > */}
-          
-            <img className=' default-round card card-small block w-full ' 
-            src={product.image} alt='Product Image' onClick={() => openModal(product)} />
-         </div>
-
+      <div className='default-round inline-block w-full' key={product.productName}>
+        <img className='default-round card card-small block w-full' 
+             src={product.image} 
+             alt='Product Image' 
+             onClick={() => openModal(product)} />
+      </div>
     );
   };
+  
 
   return (
     <>
