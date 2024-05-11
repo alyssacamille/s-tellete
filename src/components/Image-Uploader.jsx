@@ -47,7 +47,7 @@ const ImageUploader = () => {
           style={{ display: 'none' }}
         />
         {/* Decorate button and drag area */}
-        <label htmlFor="myFile" className='  h-30 bg-center bg-cover cursor-pointer' onDrop={handleDrop} onDragOver={handleDragOver}>
+        <label htmlFor="myFile" className=' m-[8em] h-30 bg-center bg-cover cursor-pointer' onDrop={handleDrop} onDragOver={handleDragOver}>
           {imgUrl ? (
             <img src={imgUrl} alt="Uploaded" className="h-full w-full object-cover" />
           ) : (
@@ -58,9 +58,6 @@ const ImageUploader = () => {
   
       {/* Additional content */}
       <div>
-     
-
-<div>
       <form action="/action_page.php" className="max-w-md mx-auto bg-white mt-3 rounded-lg ">
   <div className="mb-4">
     <label htmlFor="fname" className="block text-sm font-medium text-gray-700">First Name:</label>
@@ -74,7 +71,6 @@ const ImageUploader = () => {
 </form>
 
 
-      </div>
       </div>
     </div>
   );
