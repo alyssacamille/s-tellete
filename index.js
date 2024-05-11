@@ -5,7 +5,7 @@ import multer from 'multer';
 import path from 'path';
 
 import User from './models/User.js'; // Import User model
-import Product from './models/Products.js'; // Import Product model
+import Product from './models/Product.js'; // Import Product model
 
 const app = express();
 const PORT = process.env.PORT || 3000;
