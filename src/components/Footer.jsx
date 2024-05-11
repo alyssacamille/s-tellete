@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import Logo from './Logo';
 import Authorization from './Authorization';
-import '../styles/Form.css'; // Import the CSS file 
 
 const Footer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -44,7 +43,7 @@ const Footer = () => {
       <Modal 
         isOpen={modalIsOpen} 
         onRequestClose={closeModal} 
-        className="modal-content form-container mx-auto rounded-xl"
+        className="modal-content"
         overlayClassName="modal-overlay"
       >
         <div className='m-5'>
