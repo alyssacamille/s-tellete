@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+import './App.css'; // Import your CSS file
+
+function App() {
+  const [imgUrl, setImgUrl] = useState(''); // State to store the image URL
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    const imgLink = URL.createObjectURL(selectedFile);
+    setImgUrl(imgLink);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const droppedFile = event.dataTransfer.files[0];
+    const imgLink = URL.createObjectURL(droppedFile);
+    setImgUrl(imgLink);
+  };
+
+  return (
+    <div className="hero">
+      <label htmlFor="input-file" id="drop-area" onDrop={handleDrop} onDragOver={handleDragOver}>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file" onChange={handleFileChange} hidden />
+        <div id="img-view" style={{ backgroundImage: `url(${imgUrl})` }}>
+          {imgUrl ? null : <span>&#43;</span>}
+        </div>
+        <div className="header-search">
+          <h1>Title</h1>
+          <input className="search-input" type="text" placeholder="Add Title" />
+        </div>
+      </label>
+    </div>
+  );
+}
+
+export default App;

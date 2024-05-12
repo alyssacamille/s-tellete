@@ -23,69 +23,7 @@ const activity = {
       time: '2 hours ago',
       art: S3,
     },
-    {
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has reacted to your recent post",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },{
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has reacted to your recent post",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },
-    {
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has reacted to your recent post",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },
-    {
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has reacted to your recent post",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },
-    {
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has reacted to your recent post",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },
-    {
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has reacted to your recent post",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },
-    {
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has ",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },
-    {
-      pfp: D1, 
-      username: 'sakineko_',
-      action: "has ",
-      post: 'YCH Commission',
-      time: '',
-      art: S3,
-    },
+   
   ]
 }
 
@@ -110,10 +48,15 @@ function Notification() {
   const card = (activity) => {
     return (
       
-      <div className='default-round inline-block w-full'>
-        <img className='default-round card card-small block w-full' 
-        src={activity.pfp} alt='Profile Image' onClick={() => openModal(activity)} />
-      </div>
+     <div className='default-round inline-block'>
+  <img
+    className=' whitespace-no-wrap overflow-hidden default-round card card-small w-full max-w-xs'
+    src={activity.pfp}
+    alt='Profile Image'
+    onClick={() => openModal(activity)}
+  />
+</div>
+
 
 
     );
@@ -130,8 +73,8 @@ function Notification() {
     {activity.data.map((activityItem, index) => (
   <div className=" inline scrollable-container overflow-auto ">
     {/* Render your notification content here */}
-    <div className=" ease-in-out duration-300  p-5 flex items-center text-black gap-2 cursor-pointer default-round  hover:bg-neutral-200 transform-all" onClick={() => openModal(activityItem)}>
-  <img className='w-10 h-10 object-cover object-contain rounded-full object-contain'src={activityItem.pfp}alt='pfp'  />
+    <div className=" ease-in-out duration-300  p-5 flex items-center text-black whitespace-no-wrap overflow-hidden gap-2 cursor-pointer default-round  hover:bg-neutral-200 transform-all" onClick={() => openModal(activityItem)}>
+  <img className=' w-10 h-10 object-cover object-contain rounded-full object-contain'src={activityItem.pfp}alt='pfp'  />
 
        
        <strong>{activityItem.username}</strong>
