@@ -31,7 +31,7 @@ export default function Authorization() {
   
 
   const validateSignUp = (event) => {
-    event.preventDefault()
+    
     if (!username || !email || !password) {
       setSignupMessage("Please fill in all fields.");
       return;
@@ -59,7 +59,7 @@ export default function Authorization() {
       setLoginMessage("Please fill in all fields.");
       return;
     }
-    event.preventDefault()
+    
      // Make Axios POST request for login
      axios.post('http://127.0.0.1:5173/', {
       loginUsernameOrEmail,
@@ -68,10 +68,29 @@ export default function Authorization() {
     .then(response => {
       // Handle success
       setLoginMessage("Login Successful. You are successfully logged in!");
+      location.reload(); //Reload the page
     })
     .catch(error => {
       // Handle error
-      console.error('Error:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        if (error.response.status === 404) {
+          setLoginMessage("User not found. Please check your username or email.");
+        } else if (error.response.status === 401) {
+          setLoginMessage("Invalid credentials. Please check your password.");
+        } else {
+          setLoginMessage("An unexpected error occurred. Please try again later.");
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('Request error:', error.request);
+        setLoginMessage("No response received from server. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error('Error:', error.message);
+        setLoginMessage("An unexpected error occurred. Please try again later.");
+      }
     });
   };
 
