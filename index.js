@@ -1,14 +1,18 @@
 import express from 'express';
 import { connect } from 'mongoose'; //For MongoDB
-
-import multer from 'multer';
-import path from 'path';
-
+import bcrypt from 'bcrypt'; // For password hashing
+import cors from 'cors';
 import User from './models/User.js'; // Import User model
-import Product from './models/Product.js'; // Import Product model
+import Product from './models/Products.js'; // Import Product model
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5173;
+
+// Allow requests from all origins
+app.use(cors());
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // Connect to MongoDB as a local for now
 connect('mongodb://localhost:27017/satelite-app')
@@ -19,24 +23,65 @@ connect('mongodb://localhost:27017/satelite-app')
     console.error('Error connecting to MongoDB:', error);
 });
 
-// Set up multer for file uploads (This is where you can store your images or contents)
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-      cb(null, 'products/'); // Directory where uploaded images will be stored
-    },
-    filename: function(req, file, cb) {
-      cb(null, file.originalname); // Use the original filename
+
+// Handle POST requests for both signup and login at the root URL
+app.post('/', async (req, res) => {
+  const { username, email, dateOfBirth, password, loginUsernameOrEmail, loginPassword } = req.body;
+
+  // Signup logic
+  if (username && email && dateOfBirth && password) {
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds
+      
+      // Create a new user document
+      const newUser = await User.create({
+        username,
+        email,
+        dateOfBirth,
+        password: hashedPassword,
+      });
+      
+      // Save the user to the database
+      await newUser.save();
+
+      //Return Success Response
+      res.status(201).json({ message: "Registration Successful. You are successfully registered!", user: newUser });
+    } catch (error) {
+      console.error('Error creating user:', error);
+      res.status(500).json({ error: "Internal server error. Unable to register user." });
     }
-  });
+  } 
+  // Login logic
+  else if (loginUsernameOrEmail && loginPassword) {
+    try {
+      // Find the user by username or email
+      const user = await User.findOne({ $or: [{ username: loginUsernameOrEmail }, { email: loginUsernameOrEmail }] });
+      
+      if (!user) {
+        // User not found
+        return res.status(404).json({ error: "User not found. Please check your username or email." });
+      }
 
-const upload = multer({ storage: storage });
+      // Compare the provided password with the hashed password
+      const isPasswordMatch = await bcrypt.compare(loginPassword, user.password);
+      
+      if (isPasswordMatch) {
+        // Passwords match, login successful
+        res.status(200).json({ message: "Login Successful. You are successfully logged in!", user });
+      } else {
+        // Passwords don't match
+        res.status(401).json({ error: "Invalid credentials. Please check your password." });
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      res.status(500).json({ error: "Internal server error. Unable to log in." });
+    }
+  } else {
+    // Invalid request
+    res.status(400).json({ error: "Invalid request. Please provide the required data for login or registration." });
+  }
+});
 
-
-//We need to set up a backend here to upload image to your products via POST Request and use it
-// Handle image upload
-//app.POST()
-// Serve images from the 'products' directory
-//app.use('/products', express.static(path.join(__dirname, 'uploads')))
 
 //Listen to Server
 app.listen(PORT, () => {

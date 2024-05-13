@@ -1,14 +1,12 @@
 import React,{useState} from 'react'
+import axios from 'axios'; // Import Axios
 import Footer from './Footer';
-
-
-
-
-
+import '../styles/Form.css'
 
 export default function Authorization() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [password, setPassword] = useState("");
   const [loginUsernameOrEmail, setLoginUsernameOrEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -33,38 +31,68 @@ export default function Authorization() {
   };
   
 
-  const validateSignUp = () => {
+  const validateSignUp = (event) => {
+    event.preventDefault()
     if (!username || !email || !password) {
       setSignupMessage("Please fill in all fields.");
       return;
     }
-    localStorage.setItem("username", username);
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
-    setSignupMessage(
-      "Registration Successful. You are successfully registered!",
-    );
+    // Make Axios POST request for signup
+    axios.post('http://127.0.0.1:5173/', {
+      username,
+      email,
+      dateOfBirth,
+      password,
+    })
+    .then(response => {
+      // Handle success
+      setSignupMessage("Registration Successful. You are successfully registered!");
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error:', error);
+    });
   };
 
-  const login = () => {
-    const storedUsername = localStorage.getItem("username");
-    const storedEmail = localStorage.getItem("email");
-    const storedPassword = localStorage.getItem("password");
-
-    if (
-      (loginUsernameOrEmail === storedUsername ||
-        loginUsernameOrEmail === storedEmail) &&
-      loginPassword === storedPassword
-    ) {
-      setLoginMessage("Login Successful. You are successfully logged in!");
-    } else if (
-      loginUsernameOrEmail !== storedUsername &&
-      loginUsernameOrEmail !== storedEmail
-    ) {
-      setLoginMessage("Error: Wrong username or email.");
-    } else {
-      setLoginMessage("Error: Wrong password.");
+  const login = (event) => {
+    event.preventDefault()
+    if (!loginUsernameOrEmail || !loginPassword) {
+      setLoginMessage("Please fill in all fields.");
+      return;
     }
+    
+     // Make Axios POST request for login
+     axios.post('http://127.0.0.1:5173/', {
+      loginUsernameOrEmail,
+      loginPassword,
+    })
+    .then(response => {
+      // Handle success
+      setLoginMessage("Login Successful. You are successfully logged in!");
+      location.reload(); //Reload the page
+    })
+    .catch(error => {
+      // Handle error
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        if (error.response.status === 404) {
+          setLoginMessage("User not found. Please check your username or email.");
+        } else if (error.response.status === 401) {
+          setLoginMessage("Invalid credentials. Please check your password.");
+        } else {
+          setLoginMessage("An unexpected error occurred. Please try again later.");
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('Request error:', error.request);
+        setLoginMessage("No response received from server. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error('Error:', error.message);
+        setLoginMessage("An unexpected error occurred. Please try again later.");
+      }
+    });
   };
 
   const showModal = (title, message) => {
@@ -86,56 +114,33 @@ export default function Authorization() {
   };
 
   return (
-    <div className="form-container  w-5/6 mx-auto  rounded-xl">
-     
+    <div className="form-container w-5/6 mx-auto rounded-xl">
       <div className="tabs flex justify-around mb-6 rounded-xl w-full max-w-xs">
-      
-      <button
-  id="tab-login"
-  className={`tab flex-1  text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg ${
-    activeForm === "login" ? "active" : ""
-  }`}
-  onClick={() => {
-    fetch('http://localhost:3000/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Add any other headers if needed
-      },
-      body: JSON.stringify({
-        key: 'value',
-        // Add any data you want to send in the body
-      }),
-    })
-      
-      .then(data => {
-        console.log('Success:', data);
-        // Handle the response data
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Handle errors
-      });
-    showForm("login");
-  }}
->
-  Log in
-</button>
-
-       <button
-    id="tab-signup"
-    className={`tab flex-1  text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg ${
-      activeForm === "signup" ? "active" : ""
-    }`}
-    onClick={() => showForm("signup")}
-  >
+        <button
+          id="tab-login"
+          className={`tab flex-1 text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg ${
+            activeForm === "login" ? "active" : ""
+          }`}
+          onClick={() => showForm("login")}
+        >
+          Log in
+        </button>
+  
+        <button
+          id="tab-signup"
+          className={`tab flex-1 text-black border-none py-2 px-4 cursor-pointer rounded-md font-semibold text-lg ${
+            activeForm === "signup" ? "active" : ""
+          }`}
+          onClick={() => showForm("signup")}
+        >
           Sign up
         </button>
       </div>
-
-      <div id="login" className="form-content">
+  
+      <form id="login" className="form-content" onSubmit={login}>
         <input
           type="text"
+          name="loginUsernameOrEmail"
           placeholder="Username or email"
           value={loginUsernameOrEmail}
           onChange={(e) => setLoginUsernameOrEmail(e.target.value)}
@@ -143,39 +148,47 @@ export default function Authorization() {
         />
         <input
           type="password"
+          name="loginPassword"
           placeholder="Password"
           value={loginPassword}
           onChange={(e) => setLoginPassword(e.target.value)}
           className="py-2 px-4 mb-4 border border-gray-300 rounded-md"
         />
-        {/* <a href="#" className="text-blue-700 no-underline mb-4">
-          Forgot password?
-        </a> */}
         <button
-          onClick={login}
+          type="submit"
           className="bg-blue-700 text-white border-none py-2 px-4 cursor-pointer rounded-md w-5/6"
         >
           Log in
         </button>
         <div id="loginMessage">{loginMessage}</div>{" "}
         {/* Display login message */}
-      </div>
-
-      <div id="signup" className="form-content" style={{ display: "none" }}>
+      </form>
+  
+      <form
+        id="signup"
+        className="form-content"
+        style={{ display: activeForm === "signup" ? "block" : "none" }}
+        onSubmit={validateSignUp}
+      >
         <input
           type="text"
+          name="username"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="py-2 px-4 mb-4 border border-gray-300 rounded-md"
         />
         <input
-          type="text"
+          type="date"
+          name="dateOfBirth"
+          value={dateOfBirth}
           placeholder="Birth Date (mm/dd/yyyy)"
+          onChange={(e) => setDateOfBirth(e.target.value)}
           className="py-2 px-4 mb-4 border border-gray-300 rounded-md"
         />
         <input
           type="email"
+          name="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -183,6 +196,7 @@ export default function Authorization() {
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -190,14 +204,15 @@ export default function Authorization() {
         />
         <span style={{ color: "red" }}>{passwordError}</span>
         <button
-          onClick={validateSignUp}
+          type="submit"
           className="bg-blue-700 text-white border-none py-2 px-4 cursor-pointer rounded-md w-5/6"
         >
           Continue
         </button>
-        <div>{signupMessage}</div> {/* Display signup message */}
-      </div>
-    {/* <Footer/> */}
+        <div>{signupMessage}</div>{" "}
+        {/* Display signup message */}
+      </form>
+      {/* <Footer/> */}
     </div>
   );
 }

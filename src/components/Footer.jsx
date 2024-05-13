@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import Logo from './Logo';
 import Authorization from './Authorization';
+import '../styles/Form.css'
 
 const Footer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
