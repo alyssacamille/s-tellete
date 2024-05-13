@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios'; // Import Axios
 import Footer from './Footer';
+import '../styles/Form.css'
 
 export default function Authorization() {
   const [username, setUsername] = useState("");
@@ -31,7 +32,7 @@ export default function Authorization() {
   
 
   const validateSignUp = (event) => {
-    
+    event.preventDefault()
     if (!username || !email || !password) {
       setSignupMessage("Please fill in all fields.");
       return;
