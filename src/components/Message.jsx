@@ -41,7 +41,21 @@ const activity = {
   ]
 }
 
-function Notification() {
+function Message() {
+  const [filteredActivity, setFilteredActivity] = useState(activity.data);
+
+  const handleSearch = (searchTerm) => {
+    const filtered = activity.data.filter(
+      (item) =>
+        item.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.message.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredActivity(filtered);
+  };
+
+
+
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -141,8 +155,8 @@ function Notification() {
 
   {/* After Scroll (Scrolled State) */}
   {!isScrolled && (
-    <div className='pl-5 pb-5 pr-5 '>
-      <Search />
+    <div className='pl-5 pb-5 pr-5  shadow-sm'>
+      {/* <Search /> */}
     </div>
   )}
 </div>
@@ -197,4 +211,4 @@ function Notification() {
   );
 } 
 
-export default Notification;
+export default Message;

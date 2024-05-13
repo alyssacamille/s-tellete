@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { TbMailFilled } from 'react-icons/tb';
 import Header from './Header';
@@ -7,8 +8,12 @@ import {D1,D2,L1,L2,L3,L4,L5,L6,L7,LR1,LR2,S0,S1,S10,S11,S12,S13,S14,S15,S16,S2,
 import '../styles/Feed.css'
 import { CgClose } from "react-icons/cg";
 import Notification from './Notification';
-
+import SearchInput from './Search';
+import Navbar from './Navbar';
+import Logo from './Logo';
 // Function to shuffle an array
+
+
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -195,9 +200,59 @@ const products = {
   ]),
 };
 
-function App() {
+const Search = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = products.data.filter((product) =>
+      product.productName.toLowerCase().includes(term) ||
+      product.artist.toLowerCase().includes(term) ||
+      product.price.includes(term)
+    );
+
+    setFilteredProducts(filtered);
+  };
+
+
+}
+const Feed = () => {
+// NILIPAT KO YUNG NASA NAV
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState(products.data);
+
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase());
+    const filtered = products.data.filter(
+      (product) =>
+        product.productName.toLowerCase().includes(term.toLowerCase()) ||
+        product.artist.toLowerCase().includes(term.toLowerCase()) ||
+        product.price.includes(term.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -211,82 +266,84 @@ function App() {
 
   const card = (product) => {
     return (
-      <div className='default-round inline-block w-full' key={product.productName}>
-        <img className='default-round card card-small block w-full' 
-             src={product.image} 
-             alt='Product Image' 
-             onClick={() => openModal(product)} />
+      <div className="default-round inline-block w-full" key={product.productName}>
+        <img
+          className="default-round card card-small block w-full"
+          src={product.image}
+          alt="Product Image"
+          onClick={() => openModal(product)}
+        />
       </div>
     );
   };
-  
-
   return (
     <>
-      {/* <Header /> */}
-      <div className='columns-2 mx-auto '>
-        {products.data.map((product) => card(product))}
+<nav className={`top-round bg-white sticky top-0 max-w-[36em] z-50 duration-500 ${isScrolled ? '' : 'sticky top-0 bg-white shadow-lg'}`}>
+      {isScrolled ? (
+        <div className='p-5 justify-between flex'>
+          <Logo />   
+          <SearchInput handleSearch={handleSearch} />
+           {/* Render the Search component */}
+        </div>
+      ) : (<div  className=" sticky bg-white p-5  top-round ">
+<Logo/>
+<p className='text-left text-3xl card' style={{ color: 'black' }}>Be a satellite, orbit now! 🛰️✨</p>
+     
+<SearchInput handleSearch={handleSearch} />
+</div>
+      )}
+    </nav>
+      {/* Render your product cards */}
+      <div className="columns-2 mx-auto">
+        {filteredProducts.map((product) => card(product))}
       </div>
 
       {/* Modal */}
-      <Modal 
-       isOpen={modalIsOpen} 
-       onRequestClose={closeModal} 
-       className="modal-content"
-       overlayClassName="modal-overlay"
-        >
-      {selectedProduct && (
-      <>
- {/*profile */}
-        <div className= ' p-5 flex items-center text-black '>
-        <img className=' w-10 h-10 object-cover object-contain rounded-full object-contain' src={selectedProduct.image} alt='Product Image'/>
-         <h1 className=' card-small text-left font-bold'>{selectedProduct.artist}</h1>
-         <button className='rounded-full p-2 absolute top-3 right-3' onClick={closeModal}>
-             <CgClose className='text-black text-xl' />
-        </button>
-       
+        {/* Modal */}
+        <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className="modal-content"
+        overlayClassName="modal-overlay"
+      >
+        {selectedProduct && (
+          <>
+            {/* Profile */}
+            <div className="p-5 flex items-center text-black">
+              <img
+                className="w-10 h-10 object-cover object-contain rounded-full object-contain"
+                src={selectedProduct.image}
+                alt="Product Image"
+              />
+              <h1 className="card-small text-left font-bold">{selectedProduct.artist}</h1>
+              <button className="rounded-full p-2 absolute top-3 right-3" onClick={closeModal}>
+                <CgClose className="text-black text-xl" />
+              </button>
+            </div>
 
-        </div>
-        {/* Image div */}
-       
+            {/* Image div */}
+            <div className="fixed relative object-contain ">
+              <img className="object-contain " src={selectedProduct.image} alt="Product Image" />
+            </div>
 
-        <div  className='fixed relative object-contain '> 
-        
-          <img className='  object-contain ' src={selectedProduct.image} alt='Product Image'/>
-          {/* <FaCircleChevronLeft className=' text-stone-600 absolute text-[2rem] -left-3 top-1/2' />
-          <FaCircleChevronRight className=' text-stone-600 absolute text-[2rem] -right-3 top-1/2' /> */}
-          {/* replace with dots carosel */}
-        </div>
-
-        <div className='max-h-90% p-5 flex text-black justify-between overflow-autO'>
-         
-          <div className=''>
-            <h1 className='text-lg font-semibold'>{selectedProduct.productName}</h1>
-            <p>from {selectedProduct.price}</p>
-          </div>
-          {/* Right part of card */}
-          <div className=' text-black flex items-center justify-between gap-2 '>
-           
-                  <button className=' bg-neutral-200 card-small rounded-full'>Request</button> 
-           
-            <button className='bg-neutral-200 card card-small rounded-full'>
-            <>
-              {/* <Notification/> */}
-            </>
-             <TbMailFilled style={{ color: 'var(--subcolor)', fontSize: 24 }} />
- 
-            </button>
-          </div>
-
-         </div>
-
-    
-    </>
-  )}
-</Modal>
-
+            <div className="max-h-90% p-5 flex text-black justify-between overflow-auto">
+              <div className="">
+                <h1 className="text-lg font-semibold">{selectedProduct.productName}</h1>
+                <p>from {selectedProduct.price}</p>
+              </div>
+              {/* Right part of card */}
+              <div className="text-black flex items-center justify-between gap-2 ">
+                <button className="bg-neutral-200 card-small rounded-full">Request</button>
+                <button className="bg-neutral-200 card card-small rounded-full">
+                  <TbMailFilled style={{ color: 'var(--subcolor)', fontSize: 24 }} />
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </Modal>
     </>
   );
-}
+};
 
-export default App;
+export default Feed;

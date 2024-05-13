@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react'; // Don't forget to import useState
+import React, { useState } from 'react';
 import '../styles/App.css'
 import Header from './Header'
 import Search from './Search'
@@ -11,6 +10,9 @@ import { IoAddCircle } from "react-icons/io5";
 import ImageUploader from './Image-Uploader.jsx';
 import ReactModal from 'react-modal'; // Import ReactModal from react-modal
 import { CgClose } from 'react-icons/cg';
+
+
+
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false); // State for modal visibility
 
@@ -24,7 +26,7 @@ function App() {
 
   return (
     <> 
-      <Navbar/>
+      {/* <Navbar/> */}
     
       <div className='card card-small '>
         <Feed/> 
