@@ -14,13 +14,14 @@ app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Connect to MongoDB as a local for now
-connect('mongodb://localhost:27017/satelite-app')
+// Connect to MongoDB online!! na
+connect('mongodb+srv://saki:admin12345@cluster0.w8lu7la.mongodb.net/')
 .then(() => {
     console.log('Connected to MongoDB');
 })
 .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
+    console.log('may mali pi huhu');
 });
 
 

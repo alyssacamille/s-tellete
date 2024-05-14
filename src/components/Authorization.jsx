@@ -38,7 +38,7 @@ export default function Authorization() {
       return;
     }
     // Make Axios POST request for signup
-    axios.post('http://127.0.0.1:5173/', {
+    axios.post('https://s-tellete.vercel.app/', {
       username,
       email,
       dateOfBirth,
@@ -62,7 +62,7 @@ export default function Authorization() {
     }
     
      // Make Axios POST request for login
-     axios.post('http://127.0.0.1:5173/', {
+     axios.post('https://s-tellete.vercel.app/', {
       loginUsernameOrEmail,
       loginPassword,
     })
