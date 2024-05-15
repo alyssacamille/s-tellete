@@ -1,6 +1,7 @@
 {
   "name": "satellite-ver-1.0",
   "private": true,
+  "proxy": "https://s-tellete.vercel.app/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
