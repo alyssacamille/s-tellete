@@ -16,8 +16,9 @@ return (
 <div className="bg-white p-5 top-round sticky top-0">
   <p className='text-center text-3xl card font-bold ' style={{ color: 'black' }}>Notifications</p>
 </div>
-
-        <Notification/>
+{/* 
+        <Notification/> */}
+        <h1 className='text-center  card '> there's nothing in here yet</h1>
       <Footer />
     </>
   );
