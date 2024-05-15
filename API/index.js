@@ -1,6 +1,5 @@
 import express from 'express'; //read and write ka te
 import { connect } from 'mongoose'; // For MongoDB
-import bcrypt from 'bcrypt'; // For password hashing
 import cors from 'cors';
 import User from '../models/User.js'; // Import User model
 import Product from '../models/Products.js'; // Import Product model
@@ -56,12 +55,11 @@ app.post('/', async (req, res) => {
   // Signup logic
   if (username && email && dateOfBirth && password) {
     try {
-      const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = await User.create({
         username,
         email,
         dateOfBirth,
-        password: hashedPassword,
+        password,
       });
       await newUser.save();
       res.status(201).json({ message: "Registration Successful. You are successfully registered!", user: newUser });
