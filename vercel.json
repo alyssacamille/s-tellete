@@ -13,5 +13,15 @@
         "source": "/(.*)",
         "destination": "/api"
       }
-    ]
-} 
+
+],
+"build": {
+  "env": {
+    "MONGODB_URI": "mongodb+srv://saki:admin12345@cluster0.w8lu7la.mongodb.net/"
+  },
+  "commands": {
+    "build": "npm install",
+    "dev": "node index.js"
+  }
+}
+}
