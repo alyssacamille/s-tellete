@@ -29,7 +29,7 @@ connect('mongodb+srv://saki:admin12345@cluster0.w8lu7la.mongodb.net/')
 
 
 // Handle POST requests for both signup and login at the root URL
-app.post('/*', async (req, res) => {
+app.post('/', async (req, res) => {
   const { username, email, dateOfBirth, password, loginUsernameOrEmail, loginPassword } = req.body;
 
   // Signup logic
