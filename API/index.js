@@ -7,27 +7,12 @@ import Product from '../models/Products.js'; // Import Product model
 const app = express();
 const PORT = process.env.PORT || 5173;
 
-// Determine the allowed origins based on the environment
-const allowedOrigins = [
-  'http://localhost:5173', // Local development
-  'https://s-tellete.vercel.app' // Your Vercel deployment domain
-];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
-
-// Use CORS middleware with dynamic origin handling
-app.use(cors(corsOptions));
+// Allow requests from specific origins
+app.use(cors({
+  origin: ['https://s-tellete.vercel.app', 'https://s-tellete-alyssa-camilles-projects.vercel.app', 'https://s-tellete-git-main-alyssa-camilles-projects.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Middleware to parse JSON bodies
 app.use(express.json());

@@ -7,8 +7,12 @@ import Product from './models/Products.js'; // Import Product model
 const app = express();
 const PORT = process.env.PORT || 5173;
 
-// Allow requests from all origins
-app.use(cors());
+// Allow requests from specific origins
+app.use(cors({
+  origin: ['https://s-tellete.vercel.app', 'https://s-tellete-alyssa-camilles-projects.vercel.app', 'https://s-tellete-git-main-alyssa-camilles-projects.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
