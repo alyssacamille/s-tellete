@@ -2,8 +2,8 @@ import express from 'express'; //read and write ka te
 import { connect } from 'mongoose'; // For MongoDB
 import bcrypt from 'bcrypt'; // For password hashing
 import cors from 'cors';
-import User from './models/User.js'; // Import User model
-import Product from './models/Products.js'; // Import Product model
+import User from '../models/User.js'; // Import User model
+import Product from '../models/Products.js'; // Import Product model
 
 const app = express();
 const PORT = process.env.PORT || 5173;

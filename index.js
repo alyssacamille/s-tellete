@@ -1,70 +1,51 @@
 import express from 'express';
-import { connect } from 'mongoose'; // For MongoDB
+import { connect } from 'mongoose'; //For MongoDB
 import bcrypt from 'bcrypt'; // For password hashing
 import cors from 'cors';
 import User from './models/User.js'; // Import User model
 import Product from './models/Products.js'; // Import Product model
 
-
 const app = express();
 const PORT = process.env.PORT || 5173;
 
-// Determine the allowed origins based on the environment
-const allowedOrigins = [
-  'http://localhost:5173', // Local development
-  'https://s-tellete.vercel.app' // Your Vercel deployment domain
-];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
-
-// Use CORS middleware with dynamic origin handling
-app.use(cors(corsOptions));
+// Allow requests from all origins
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Connect to MongoDB
+// Connect to MongoDB online!! na
 connect('mongodb+srv://saki:admin12345@cluster0.w8lu7la.mongodb.net/')
-  .then(() => {
+.then(() => {
     console.log('Connected to MongoDB');
-  })
-  .catch((error) => {
+})
+.catch((error) => {
     console.error('Error connecting to MongoDB:', error);
-  });
+    console.log('may mali pi huhu');
+});
 
-// Handle preflight requests
-app.options('*', cors(corsOptions));
 
 // Handle POST requests for both signup and login at the root URL
 app.post('/', async (req, res) => {
   const { username, email, dateOfBirth, password, loginUsernameOrEmail, loginPassword } = req.body;
 
-  // Set CORS headers
-  res.header('Access-Control-Allow-Origin', '*'); // For demonstration, set this to the correct origins
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-
   // Signup logic
   if (username && email && dateOfBirth && password) {
     try {
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds
+      
+      // Create a new user document
       const newUser = await User.create({
         username,
         email,
         dateOfBirth,
         password: hashedPassword,
       });
+      
+      // Save the user to the database
       await newUser.save();
+
+      //Return Success Response
       res.status(201).json({ message: "Registration Successful. You are successfully registered!", user: newUser });
     } catch (error) {
       console.error('Error creating user:', error);
@@ -74,14 +55,22 @@ app.post('/', async (req, res) => {
   // Login logic
   else if (loginUsernameOrEmail && loginPassword) {
     try {
+      // Find the user by username or email
       const user = await User.findOne({ $or: [{ username: loginUsernameOrEmail }, { email: loginUsernameOrEmail }] });
+      
       if (!user) {
+        // User not found
         return res.status(404).json({ error: "User not found. Please check your username or email." });
       }
+
+      // Compare the provided password with the hashed password
       const isPasswordMatch = await bcrypt.compare(loginPassword, user.password);
+      
       if (isPasswordMatch) {
+        // Passwords match, login successful
         res.status(200).json({ message: "Login Successful. You are successfully logged in!", user });
       } else {
+        // Passwords don't match
         res.status(401).json({ error: "Invalid credentials. Please check your password." });
       }
     } catch (error) {
@@ -95,7 +84,8 @@ app.post('/', async (req, res) => {
 });
 
 
-// Listen to Server
+//Listen to Server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
+
