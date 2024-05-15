@@ -36,7 +36,7 @@ const ImageUploader = () => {
 
   return (
    <div> 
-   <div className="mb-4 mx-6 image-uploader object-contain h-[80%] border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
+   <div className=" icon hover:text-blue-900 transform hover:scale-110 transition duration-100 ease-in-out mb-4 mx-6 image-uploader object-contain h-[80%] border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
   {/* Hidden input to trigger file selection */}
   <label htmlFor="myFile" className="h-full w-full bg-center bg-cover cursor-pointer relative">
     <input

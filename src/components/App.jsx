@@ -36,7 +36,7 @@ function App() {
       <div className='flex justify-end relative right-0 mb-20 mr-0 p-100 z-99'>
         <div className="fixed mx-auto p-8 z-99 bottom-16 items-end">
           <IoAddCircle
-            className='cursor-pointer'
+            className='cursor-pointer  icon hover:text-blue-900 transform hover:scale-110 transition duration-100 ease-in-out'
             style={{ fontSize: '5rem' }}
             onClick={() => {
               openModal(); // Call openModal function when the IoAddCircle icon is clicked
@@ -62,7 +62,7 @@ function App() {
         <h1 className='font-bold'> Post</h1>
       </div>
        
-           <ImageUploader/>
+           <ImageUploader />
         </ReactModal>
       </div>
     </>

@@ -39,9 +39,9 @@ const App = () => {
 
   return (
     <>
-      <div className='carousel-container  overflow-x-auto h-[100%]  bottom-20 whitespace-nowrap'>
+      <div className='carousel-container  overflow-x-auto  bottom-20 whitespace-nowrap'>
         {products.data.map((product, index) => (
-          <div key={index} className='carousel-item   inline-block'>{card(product)}</div>
+          <div key={index} className='carousel-item  inline-block'>{card(product)}</div>
         ))}
       </div>
 

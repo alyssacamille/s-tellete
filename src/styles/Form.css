@@ -32,7 +32,8 @@
   }
   
   .tab.active {
-    background-color: #ddd; /* Adjust active tab background color as needed */
+    background-color: #012367; 
+    color:#f9f9f9/* Adjust active tab background color as needed */
   }
   
   /* Form content */
@@ -51,8 +52,7 @@
   input[type="date"] {
     width: 100%; /* Adjust input width as needed */
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc; /* Adjust border color as needed */
+    /* border: 1px solid #ccc;  */
     border-radius: 5px;
   }
   

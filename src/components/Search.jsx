@@ -17,7 +17,7 @@
 
     return (
       <div className="">
-        <div className="flex items-center text-center gap-2 justify-center overflow-hidden w-[100%] default-round p-3" style={{ background: 'var(--sub-color)' }}>
+        <div className="flex items-center text-center gap-2 justify-center overflow-hidden w-[100%]  rounded-full p-3" style={{ background: 'var(--sub-color)' }}>
           <IoSearch className="align-middle h-6 w-6" />
           {/* Use the handleChange function for the onChange event */}
           <input 

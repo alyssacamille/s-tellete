@@ -14,7 +14,7 @@ export default function MessageInput() {
   return (
     <div className=''>
     <div className="">
-      <div className="flex  items-center text-center gap-2 justify-center overflow-hidden   w-[100%] default-round p-3 " style={{ background: 'var(--sub-color)'}}>  
+      <div className="flex  items-center text-center gap-2 justify-center overflow-hidden   w-[100%]  rounded-full p-3 " style={{ background: 'var(--sub-color)'}}>  
       <IoAttach className="align-middle h-6 w-6  " />
   <input className="bg-transparent w-full outline-none" type="text" placeholder="Aa " />
   <IoSend onClick={clickHandler} className="align-middle   h-5 w-5 " />

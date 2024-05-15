@@ -11,6 +11,7 @@ import Notification from './Notification';
 import SearchInput from './Search';
 import Navbar from './Navbar';
 import Logo from './Logo';
+import { Link } from 'react-router-dom';
 // Function to shuffle an array
 
 
@@ -281,7 +282,13 @@ const Feed = () => {
 <nav className={`top-round bg-white sticky top-0 max-w-[36em] z-50 duration-500 ${isScrolled ? '' : 'sticky top-0 bg-white shadow-lg'}`}>
       {isScrolled ? (
         <div className='p-5 justify-between flex'>
-          <Logo />   
+
+        <Link to={"/Messages"} className="icon hover:text-blue-900 transform hover:scale-110 transition duration-100 ease-in-out"
+>
+      <Logo className="icon hover:text-blue-900 transform hover:scale-110 transition duration-100 ease-in-out" size={'24'}/>
+      </Link> 
+
+
           <SearchInput handleSearch={handleSearch} />
            {/* Render the Search component */}
         </div>
@@ -333,10 +340,16 @@ const Feed = () => {
               </div>
               {/* Right part of card */}
               <div className="text-black flex items-center justify-between gap-2 ">
-                <button className="bg-neutral-200 card-small rounded-full">Request</button>
+
+
+                <Link to="/Messages">
+  <button className="bg-neutral-200 card-small rounded-full">Request</button>
+
+     </Link>
+{/* 
                 <button className="bg-neutral-200 card card-small rounded-full">
                   <TbMailFilled style={{ color: 'var(--subcolor)', fontSize: 24 }} />
-                </button>
+                </button> */}
               </div>
             </div>
           </>
